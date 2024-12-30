@@ -1,0 +1,41 @@
+# Archivos y carpetas específicas de .NET y Visual Studio
+bin/
+obj/
+*.user
+*.suo
+*.sln.docstates
+*.pdb
+*.cache
+*.log
+
+# Archivos de configuración temporal
+*.vscode/
+*.vs/
+.idea/
+
+# Archivos de compilación intermedios y logs
+*.dll
+*.exe
+*.app
+*.o
+*.a
+*.out
+
+# Archivos de dependencias
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Configuraciones específicas del sistema operativo
+.DS_Store
+Thumbs.db
+
+# NuGet
+*.nupkg
+packages/
+*.snupkg
+.nuget/
+
+# Configuración de depuración
+.vscode/launch.json
+launchSettings.json
