@@ -1,9 +1,9 @@
 ﻿using CreditCardManager.Models.Movement;
-using CreditCardManager.Repositories;
+using CreditCardManager.Repositories.Movements;
 
-namespace CreditCardManager.Services
+namespace CreditCardManager.Services.Movements
 {
-    public class MovementService
+    public class MovementService : IMovementService
     {
         private readonly IMovementRepository _movementRepository;
 
@@ -19,7 +19,7 @@ namespace CreditCardManager.Services
             return movement;
         }
 
-        public async Task<Movement> GetMovementByIdAsync(int id)
+        public async Task<Movement?> GetMovementByIdAsync(int id)
         {
             return await _movementRepository.GetByIdAsync(id);
         }

@@ -1,7 +1,7 @@
 ﻿using CreditCardManager.Data;
 using CreditCardManager.Models.Movement;
 using Microsoft.EntityFrameworkCore;
-namespace CreditCardManager.Repositories
+namespace CreditCardManager.Repositories.Movements
 {
     public class MovementRepository : IMovementRepository
     {
@@ -12,7 +12,7 @@ namespace CreditCardManager.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<Movement> GetByIdAsync(int id)
+        public async Task<Movement?> GetByIdAsync(int id)
         {
             return await _dbContext.Movements.FindAsync(id);
         }

@@ -1,13 +1,13 @@
 using CreditCardManager.Data;
-using CreditCardManager.Repositories;
-using CreditCardManager.Services;
+using CreditCardManager.Repositories.Movements;
+using CreditCardManager.Services.Movements;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<IMovementRepository, MovementRepository>();
-builder.Services.AddScoped<MovementService>(); 
+builder.Services.AddScoped<IMovementService, MovementService>(); 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
