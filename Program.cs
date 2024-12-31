@@ -1,4 +1,5 @@
 using CreditCardManager.Data;
+using CreditCardManager.Middlewares;
 using CreditCardManager.Repositories.Movements;
 using CreditCardManager.Services.Movements;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 
 var app = builder.Build();
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
