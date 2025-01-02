@@ -2,7 +2,8 @@
 {
     public class MovementRequest
     {
-        public string? Card { get; set; }
+        public int? CardID { get; set; }
+        public string? CardAlias { get; set; }
         public decimal Amount { get; set; }
         public int InstallmentsQty { get; set; }
         public string? Date { get; set; }

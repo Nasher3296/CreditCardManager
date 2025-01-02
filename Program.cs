@@ -1,7 +1,9 @@
 using CreditCardManager.Data;
 using CreditCardManager.Middlewares;
+using CreditCardManager.Repositories.Cards;
 using CreditCardManager.Repositories.Movements;
 using CreditCardManager.Repositories.Payers;
+using CreditCardManager.Services.Cards;
 using CreditCardManager.Services.Movements;
 using CreditCardManager.Services.Payers;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +15,9 @@ builder.Services.AddScoped<IMovementRepository, MovementRepository>();
 builder.Services.AddScoped<IMovementService, MovementService>();
 builder.Services.AddScoped<IPayerRepository, PayerRepository>();
 builder.Services.AddScoped<IPayerService, PayerService>();
+builder.Services.AddScoped<ICardRepository, CardRepository>();
+builder.Services.AddScoped<ICardService, CardService>();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
