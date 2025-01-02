@@ -2,7 +2,7 @@
 {
     public class JwtException : CustomException
     {
-        public JwtException(int statusCode, string message, object? additionalData = null)
+        private JwtException(int statusCode, string message, object? additionalData = null)
             : base(StatusCodes.Status401Unauthorized, message, additionalData)
         {
         }

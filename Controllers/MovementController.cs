@@ -1,6 +1,5 @@
 ﻿using CreditCardManager.Models.Movement;
 using CreditCardManager.Services.Movements;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CreditCardManager.Controllers
@@ -35,18 +34,7 @@ namespace CreditCardManager.Controllers
                 return BadRequest(ModelState);
             }
 
-            var movement = new Movement
-            {
-                Card = request.Card ?? string.Empty,
-                Amount = request.Amount,
-                InstallmentsQty = request.InstallmentsQty,
-                Date = DateOnly.TryParse(request.Date, out var parsedDate) ? parsedDate : DateOnly.FromDateTime(DateTime.Now),
-                Detail = request.Detail ?? string.Empty,
-                Payer = request.Payer ?? string.Empty,
-                Observations = request.Observations ?? string.Empty
-            };
-
-            var createdMovement = await _movementService.AddMovementAsync(movement);
+            var createdMovement = await _movementService.CreateMovementAsync(request);
             return CreatedAtAction(nameof(GetMovementById), new { id = createdMovement.Id }, createdMovement);
         }
     }

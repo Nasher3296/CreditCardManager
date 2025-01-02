@@ -1,4 +1,6 @@
-﻿namespace CreditCardManager.Models.Movement
+﻿using CreditCardManager.Models.Payers;
+
+namespace CreditCardManager.Models.Movement
 {
     public class Movement
     {
@@ -8,7 +10,7 @@
         public int InstallmentsQty { get; set; }
         public DateOnly Date { get; set; }
         public string? Detail { get; set; }
-        public string? Payer { get; set; }
+        public Payer? Payer { get; set; }
         public string? Observations { get; set; }
 
     }
