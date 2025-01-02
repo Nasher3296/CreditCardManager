@@ -2,11 +2,7 @@
 
 namespace CreditCardManager.Repositories.Movements
 {
-    public interface IMovementRepository
+    public interface IMovementRepository : IRepository<Movement>
     {
-        Task<Movement?> GetByIdAsync(int id);
-        Task<List<Movement>> GetAllAsync();
-        Task AddAsync(Movement movement);
-        Task SaveAsync();
     }
 }
