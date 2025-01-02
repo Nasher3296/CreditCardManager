@@ -19,31 +19,7 @@ namespace CreditCardManager.Services.Movements
 
         public async Task<Movement> CreateMovementAsync(MovementRequest request)
         {
-            Payer? payer = null;
-
-            if (request.PayerID.HasValue)
-            {
-                payer = await _payerService.GetPayerByIdAsync(request.PayerID.Value);
-                if (payer == null)
-                {
-                    throw new NotFoundException($"Payer with ID {request.PayerID.Value} not found.");
-                }
-            }
-            else if (! string.IsNullOrEmpty(request.PayerName))
-            {
-                payer = await _payerService.GetPayerByNameAsync(request.PayerName);
-                
-                if(payer == null)
-                {
-                    //Autocreate payer using the payername
-                    payer = await _payerService.AddPayerAsync(new Payer { Name = request.PayerName });
-
-                    if (payer == null)
-                    {
-                        // I haven't thought about this case yet. Might throw an exception.
-                    }
-                }
-            }
+            Payer? payer = await getRequestPayer(request);
 
             var movement = new Movement
             {
@@ -74,6 +50,35 @@ namespace CreditCardManager.Services.Movements
         public async Task<List<Movement>> GetAllMovementsAsync()
         {
             return await _movementRepository.GetAllAsync();
+        }
+
+        /*---------*/
+        private async Task<Payer> getRequestPayer(MovementRequest request) {
+            Payer? payer = null;
+
+            if (request.PayerID.HasValue)
+            {
+                payer = await _payerService.GetPayerByIdAsync(request.PayerID.Value);
+                if (!(payer == null)) return payer;
+
+                throw new NotFoundException($"Payer with ID {request.PayerID.Value} not found.");
+            }
+            
+            if (!string.IsNullOrEmpty(request.PayerName))
+            {
+                payer = await _payerService.GetPayerByNameAsync(request.PayerName);
+
+                if (!(payer == null)) return payer;
+
+                //Autocreate payer using the payername
+
+                payer = await _payerService.AddPayerAsync(new Payer { Name = request.PayerName });
+                if (!(payer == null)) return payer;
+
+                // I haven't thought about this case yet. Might throw an exception.
+            }
+
+            return payer;
         }
     }
 }
