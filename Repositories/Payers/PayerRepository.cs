@@ -1,7 +1,6 @@
 ﻿using CreditCardManager.Data;
-using CreditCardManager.Models.Movement;
 using CreditCardManager.Models.Payers;
-using CreditCardManager.Repositories.Movements;
+using Microsoft.EntityFrameworkCore;
 
 namespace CreditCardManager.Repositories.Payers
 {
@@ -9,6 +8,10 @@ namespace CreditCardManager.Repositories.Payers
     {
         public PayerRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
+        }
+        public async Task<Payer?> GetByNameAsync(string payerName)
+        {
+            return await _dbContext.Set<Payer>().FirstOrDefaultAsync(p => p.Name.Trim().ToLower() == payerName.Trim().ToLower());
         }
     }
 }

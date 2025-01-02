@@ -21,12 +21,27 @@ namespace CreditCardManager.Services.Movements
         {
             Payer? payer = null;
 
-            if (request.Payer.HasValue)
+            if (request.PayerID.HasValue)
             {
-                payer = await _payerService.GetPayerByIdAsync(request.Payer.Value);
+                payer = await _payerService.GetPayerByIdAsync(request.PayerID.Value);
                 if (payer == null)
                 {
-                    throw new NotFoundException($"Payer with ID {request.Payer.Value} not found.");
+                    throw new NotFoundException($"Payer with ID {request.PayerID.Value} not found.");
+                }
+            }
+            else if (! string.IsNullOrEmpty(request.PayerName))
+            {
+                payer = await _payerService.GetPayerByNameAsync(request.PayerName);
+                
+                if(payer == null)
+                {
+                    //Autocreate payer using the payername
+                    payer = await _payerService.AddPayerAsync(new Payer { Name = request.PayerName });
+
+                    if (payer == null)
+                    {
+                        // I haven't thought about this case yet. Might throw an exception.
+                    }
                 }
             }
 

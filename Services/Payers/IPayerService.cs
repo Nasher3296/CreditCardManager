@@ -6,6 +6,7 @@ namespace CreditCardManager.Services.Payers
     {
         public Task<Payer> AddPayerAsync(Payer payer);
         public Task<Payer?> GetPayerByIdAsync(int id);
+        public Task<Payer?> GetPayerByNameAsync(string payerName);
         public Task<List<Payer>> GetAllPayersAsync();
     }
 }

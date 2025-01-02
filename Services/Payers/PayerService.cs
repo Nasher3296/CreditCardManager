@@ -24,6 +24,11 @@ namespace CreditCardManager.Services.Payers
             return await _payerRepository.GetByIdAsync(id);
         }
 
+        public async Task<Payer?> GetPayerByNameAsync(string payerName)
+        {
+            return await _payerRepository.GetByNameAsync(payerName);
+        }
+
         public async Task<List<Payer>> GetAllPayersAsync()
         {
             return await _payerRepository.GetAllAsync();
