@@ -4,9 +4,9 @@ namespace CreditCardManager.Models.Cards
 {
     public class CardRequest
     {
-        public required string Alias;
+        public required string Alias { get; set; }
         public int? BankID { get; set; }
         public string? BankName { get; set; }
-        public required string Company;
+        public required string Company { get; set; }
     }
 }

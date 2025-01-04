@@ -2,6 +2,6 @@
 {
     public class BankRequest
     {
-        public required string Name;
+        public required string Name { get; set; }
     }
 }
