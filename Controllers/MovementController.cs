@@ -35,7 +35,7 @@ namespace CreditCardManager.Controllers
             }
 
             var createdMovement = await _movementService.CreateMovementAsync(request);
-            return CreatedAtAction(nameof(GetMovementById), new { id = createdMovement.Id }, createdMovement);
+            return CreatedAtAction(nameof(Add), new { id = createdMovement.Id }, createdMovement);
         }
     }
 }

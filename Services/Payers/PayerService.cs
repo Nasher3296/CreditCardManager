@@ -1,4 +1,5 @@
-﻿using CreditCardManager.Models.Payers;
+﻿using CreditCardManager.Exceptions;
+using CreditCardManager.Models.Payers;
 using CreditCardManager.Repositories.Payers;
 
 namespace CreditCardManager.Services.Payers
@@ -6,12 +7,27 @@ namespace CreditCardManager.Services.Payers
     public class PayerService : IPayerService
     {
         private readonly IPayerRepository _payerRepository;
-
         public PayerService(IPayerRepository payerRepository)
         {
             _payerRepository = payerRepository;
         }
 
+        public async Task<Payer> CreatePayerAsync(PayerRequest request)
+        {
+            var existingPayer = await _payerRepository.GetByNameAsync(request.Name);
+
+            if (existingPayer != null)
+            {
+                throw new BusinessException($"A payer with the name '{request.Name}' already exists.", new { existingPayer.Id, existingPayer.Name });
+            }
+
+            var payer = new Payer
+            {
+                Name = request.Name
+            };
+
+            return await AddPayerAsync(payer);
+        }
         public async Task<Payer> AddPayerAsync(Payer payer)
         {
             await _payerRepository.AddAsync(payer);

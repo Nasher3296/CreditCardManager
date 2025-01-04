@@ -1,4 +1,5 @@
-﻿using CreditCardManager.Services.Cards;
+﻿using CreditCardManager.Models.Cards;
+using CreditCardManager.Services.Cards;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +26,18 @@ namespace CreditCardManager.Controllers
                 return NotFound(new { message = "Card not found" });
             }
             return Ok(card);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody] CardRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var createdMovement = await _cardService.CreateCardAsync(request);
+            return CreatedAtAction(nameof(Add), new { id = createdMovement.Id }, createdMovement);
         }
     }
 }

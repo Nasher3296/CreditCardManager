@@ -1,4 +1,4 @@
-﻿using CreditCardManager.Services.Movements;
+﻿using CreditCardManager.Models.Payers;
 using CreditCardManager.Services.Payers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +25,18 @@ namespace CreditCardManager.Controllers
                 return NotFound(new { message = "Payer not found" });
             }
             return Ok(payer);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody] PayerRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var cratedPayer = await _payerService.CreatePayerAsync(request);
+            return CreatedAtAction(nameof(Add), new { id = cratedPayer.Id }, cratedPayer);
         }
     }
 }
