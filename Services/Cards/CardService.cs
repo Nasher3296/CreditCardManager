@@ -81,7 +81,7 @@ namespace CreditCardManager.Services.Cards
                 bank = await _bankService.AddBankAsync(new Bank { Name = request.BankName });
                 if (!(bank == null)) return bank;
 
-                // I haven't thought about this case yet. Might throw an exception.
+                //TODO: I haven't thought about this case yet. Might throw an exception.
             }
 
             return bank;

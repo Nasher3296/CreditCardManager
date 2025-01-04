@@ -81,7 +81,7 @@ namespace CreditCardManager.Services.Movements
                 payer = await _payerService.AddPayerAsync(new Payer { Name = request.PayerName });
                 if (!(payer == null)) return payer;
 
-                // I haven't thought about this case yet. Might throw an exception.
+                //TODO: I haven't thought about this case yet. Might throw an exception.
             }
 
             return payer;
@@ -110,7 +110,7 @@ namespace CreditCardManager.Services.Movements
                 card = await _cardService.AddCardAsync(new Card { Alias = request.CardAlias });
                 if (!(card == null)) return card;
 
-                // I haven't thought about this case yet. Might throw an exception.
+                //TODO: I haven't thought about this case yet. Might throw an exception.
             }
 
             return card;
