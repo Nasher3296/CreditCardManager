@@ -9,18 +9,10 @@ using CreditCardManager.Services.Banks;
 
 namespace CreditCardManager.Services.Cards
 {
-    public class CardService : ICardService
+    public class CardService(ICardRepository cardRepository, IBankService bankService) : ICardService
     {
-        private readonly ICardRepository _cardRepository;
-        private readonly IBankService _bankService;
-
-
-        public CardService(ICardRepository cardRepository, IBankService bankService)
-        {
-            _cardRepository = cardRepository;
-            _bankService = bankService;
-        }
-
+        private readonly ICardRepository _cardRepository = cardRepository;
+        private readonly IBankService _bankService = bankService;
 
         public async Task<Card> CreateCardAsync(CardRequest request)
         {

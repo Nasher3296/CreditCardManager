@@ -10,14 +10,9 @@ namespace CreditCardManager.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class CardController : ControllerBase
+    public class CardController(ICardService cardService) : ControllerBase
     {
-        private readonly ICardService _cardService;
-
-        public CardController(ICardService cardService)
-        {
-            _cardService = cardService;
-        }
+        private readonly ICardService _cardService = cardService;
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCardById([FromRoute] int id)

@@ -4,13 +4,9 @@ using CreditCardManager.Repositories.Payers;
 
 namespace CreditCardManager.Services.Payers
 {
-    public class PayerService : IPayerService
+    public class PayerService(IPayerRepository payerRepository) : IPayerService
     {
-        private readonly IPayerRepository _payerRepository;
-        public PayerService(IPayerRepository payerRepository)
-        {
-            _payerRepository = payerRepository;
-        }
+        private readonly IPayerRepository _payerRepository = payerRepository;
 
         public async Task<Payer> CreatePayerAsync(PayerRequest request)
         {

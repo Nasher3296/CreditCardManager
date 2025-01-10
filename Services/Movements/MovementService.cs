@@ -8,18 +8,11 @@ using CreditCardManager.Services.Payers;
 
 namespace CreditCardManager.Services.Movements
 {
-    public class MovementService : IMovementService
+    public class MovementService(IMovementRepository movementRepository, IPayerService payerService, ICardService cardService) : IMovementService
     {
-        private readonly IMovementRepository _movementRepository;
-        private readonly IPayerService _payerService;
-        private readonly ICardService _cardService;
-
-        public MovementService(IMovementRepository movementRepository, IPayerService payerService, ICardService cardService)
-        {
-            _movementRepository = movementRepository;
-            _payerService = payerService;
-            _cardService = cardService;
-        }
+        private readonly IMovementRepository _movementRepository = movementRepository;
+        private readonly IPayerService _payerService = payerService;
+        private readonly ICardService _cardService = cardService;
 
         public async Task<Movement> CreateMovementAsync(MovementRequest request)
         {

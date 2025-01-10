@@ -1,10 +1,6 @@
 ﻿namespace CreditCardManager.Exceptions
 {
-    public class BusinessException : CustomException
+    public class BusinessException(string message, object? additionalData = null) : CustomException(StatusCodes.Status409Conflict, message, additionalData)
     {
-        public BusinessException(string message, object? additionalData = null)
-            : base(StatusCodes.Status409Conflict, message, additionalData)
-        {
-        }
     }
 }

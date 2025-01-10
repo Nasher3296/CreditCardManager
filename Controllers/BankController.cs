@@ -9,13 +9,9 @@ namespace CreditBankManager.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class BankController : ControllerBase
+    public class BankController(IBankService bankService) : ControllerBase
     {
-        private readonly IBankService _bankService;
-        public BankController(IBankService bankService)
-        {
-            _bankService = bankService;
-        }
+        private readonly IBankService _bankService = bankService;
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBankById([FromRoute] int id)

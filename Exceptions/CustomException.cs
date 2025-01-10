@@ -1,16 +1,9 @@
 ﻿namespace CreditCardManager.Exceptions
 {
-    public abstract class CustomException : Exception
+    public abstract class CustomException(int statusCode, string message, object? additionalData = null) : Exception(message)
     {
-        public int StatusCode { get; }
-        public object? AdditionalData { get; }
-
-        protected CustomException(int statusCode, string message, object? additionalData = null)
-            : base(message)
-        {
-            StatusCode = statusCode;
-            AdditionalData = additionalData;
-        }
+        public int StatusCode { get; } = statusCode;
+        public object? AdditionalData { get; } = additionalData;
     }
 
 }

@@ -4,12 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CreditCardManager.Repositories.Banks
 {
-    public class BankRepository : RepositoryBaseDB<Bank>, IBankRepository
+    public class BankRepository(ApplicationDbContext dbContext) : RepositoryBaseDB<Bank>(dbContext), IBankRepository
     {
-        public BankRepository(ApplicationDbContext dbContext) : base(dbContext)
-        {
-        }
-
         public async Task<Bank?> GetByNameAsync(string bankName)
         { 
             return await _dbContext.Set<Bank>().FirstOrDefaultAsync(b => b.Name.Trim().ToLower() == bankName.Trim().ToLower());

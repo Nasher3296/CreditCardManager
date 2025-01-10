@@ -3,10 +3,7 @@ using CreditCardManager.Models.Movement;
 using Microsoft.EntityFrameworkCore;
 namespace CreditCardManager.Repositories.Movements
 {
-    public class MovementRepository : RepositoryBaseDB<Movement>, IMovementRepository
+    public class MovementRepository(ApplicationDbContext dbContext) : RepositoryBaseDB<Movement>(dbContext), IMovementRepository
     {
-        public MovementRepository(ApplicationDbContext dbContext) : base(dbContext)
-        {
-        }
     }
 }

@@ -7,13 +7,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CreditCardManager.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-           : base(options)
-        {
-        }
-
         public DbSet<Movement> Movements { get; set; }
         public DbSet<Bank> Banks { get; set; }
         public DbSet<Card> Cards { get; set; }

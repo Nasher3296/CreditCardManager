@@ -4,16 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CreditCardManager.Repositories
 {
-    public abstract class RepositoryBaseDB<T> : IRepository<T> where T : class
+    public abstract class RepositoryBaseDB<T>(ApplicationDbContext dbContext) : IRepository<T> where T : class
     {
-        protected readonly ApplicationDbContext _dbContext;
-        protected readonly DbSet<T> _dbSet;
-
-        public RepositoryBaseDB(ApplicationDbContext dbContext)
-        {
-            _dbContext = dbContext;
-            _dbSet = dbContext.Set<T>();
-        }
+        protected readonly ApplicationDbContext _dbContext = dbContext;
+        protected readonly DbSet<T> _dbSet = dbContext.Set<T>();
 
         public async Task<T?> GetByIdAsync(int id)
         {

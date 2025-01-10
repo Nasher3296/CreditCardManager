@@ -7,16 +7,10 @@ namespace CreditCardManager.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController(IJwtService jwtService, IUserService userService) : ControllerBase
     {
-        private readonly IJwtService _jwtService;
-        private readonly IUserService _userService;
-
-        public AuthController(IJwtService jwtService, IUserService userService)
-        {
-            _jwtService = jwtService;
-            _userService = userService;
-        }
+        private readonly IJwtService _jwtService = jwtService;
+        private readonly IUserService _userService = userService;
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)

@@ -1,5 +1,6 @@
 ﻿using CreditCardManager.Models.Movement;
 using CreditCardManager.Services.Movements;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CreditCardManager.Controllers
@@ -7,14 +8,9 @@ namespace CreditCardManager.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class MovementController : ControllerBase
+    public class MovementController(IMovementService movementService) : ControllerBase
     {
-        private readonly IMovementService _movementService;
-
-        public MovementController(IMovementService movementService)
-        {
-            _movementService = movementService;
-        }
+        private readonly IMovementService _movementService = movementService;
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetMovementById([FromRoute] int id)

@@ -4,12 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CreditCardManager.Repositories.Users
 {
-    public class UserRepository : RepositoryBaseDB<User>, IUserRepository
+    public class UserRepository(ApplicationDbContext dbContext) : RepositoryBaseDB<User>(dbContext), IUserRepository
     {
-        public UserRepository(ApplicationDbContext dbContext) : base(dbContext)
-        {
-        }
-
         public async Task<User?> GetByEmailAsync(string userEmail)
         {
             return await _dbContext.Set<User>().FirstOrDefaultAsync(u => u.Email.Trim().ToLower() == userEmail.Trim().ToLower());

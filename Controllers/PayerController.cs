@@ -1,5 +1,6 @@
 ﻿using CreditCardManager.Models.Payers;
 using CreditCardManager.Services.Payers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,14 +9,9 @@ namespace CreditCardManager.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class PayerController : ControllerBase
+    public class PayerController(IPayerService payerService) : ControllerBase
     {
-        private readonly IPayerService _payerService;
-
-        public PayerController(IPayerService payerService)
-        {
-            _payerService = payerService;
-        }
+        private readonly IPayerService _payerService = payerService;
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPayerById([FromRoute] int id)

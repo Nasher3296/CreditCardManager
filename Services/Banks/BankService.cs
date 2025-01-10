@@ -4,13 +4,9 @@ using CreditCardManager.Repositories.Banks;
 
 namespace CreditCardManager.Services.Banks
 {
-    public class BankService : IBankService
+    public class BankService(IBankRepository bankRepository) : IBankService
     {
-        private readonly IBankRepository _bankRepository;
-        public BankService(IBankRepository bankRepository)
-        {
-            _bankRepository = bankRepository;
-        }
+        private readonly IBankRepository _bankRepository = bankRepository;
 
         public async Task<Bank> AddBankAsync(Bank bank)
         {
