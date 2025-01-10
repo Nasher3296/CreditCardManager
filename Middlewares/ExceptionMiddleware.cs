@@ -45,7 +45,8 @@ namespace CreditCardManager.Middlewares
                 response = new
                 {
                     message = "An unexpected error occurred.",
-                    error = exception.Message
+                    error = exception.Message,
+                    line = exception.StackTrace
                 };
             }
 

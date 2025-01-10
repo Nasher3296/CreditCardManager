@@ -6,6 +6,7 @@ namespace CreditCardManager.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class MovementController : ControllerBase
     {
         private readonly IMovementService _movementService;

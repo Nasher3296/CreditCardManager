@@ -25,9 +25,9 @@ namespace CreditCardManager.Repositories
             return await _dbSet.ToListAsync();
         }
 
-        public async Task AddAsync(T movement)
+        public async Task AddAsync(T entity)
         {
-            await _dbSet.AddAsync(movement);
+            await _dbSet.AddAsync(entity);
         }
 
         public async Task SaveAsync()

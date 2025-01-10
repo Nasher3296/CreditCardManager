@@ -7,6 +7,7 @@ namespace CreditCardManager.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PayerController : ControllerBase
     {
         private readonly IPayerService _payerService;

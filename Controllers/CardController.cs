@@ -1,5 +1,6 @@
 ﻿using CreditCardManager.Models.Cards;
 using CreditCardManager.Services.Cards;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace CreditCardManager.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CardController : ControllerBase
     {
         private readonly ICardService _cardService;
@@ -36,8 +38,8 @@ namespace CreditCardManager.Controllers
                 return BadRequest(ModelState);
             }
 
-            var createdMovement = await _cardService.CreateCardAsync(request);
-            return CreatedAtAction(nameof(Add), new { id = createdMovement.Id }, createdMovement);
+            var createdCard = await _cardService.CreateCardAsync(request);
+            return CreatedAtAction(nameof(Add), new { id = createdCard.Id }, createdCard);
         }
     }
 }

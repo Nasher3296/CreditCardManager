@@ -1,5 +1,6 @@
 ﻿using CreditCardManager.Models.Banks;
 using CreditCardManager.Services.Banks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace CreditBankManager.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BankController : ControllerBase
     {
         private readonly IBankService _bankService;

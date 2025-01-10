@@ -2,6 +2,7 @@
 using CreditCardManager.Models.Cards;
 using CreditCardManager.Models.Movement;
 using CreditCardManager.Models.Payers;
+using CreditCardManager.Models.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace CreditCardManager.Data
@@ -17,6 +18,7 @@ namespace CreditCardManager.Data
         public DbSet<Bank> Banks { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<Payer> Payers { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -51,6 +53,14 @@ namespace CreditCardManager.Data
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Name).IsRequired().HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Username).IsRequired().HasMaxLength(50);
+                entity.Property(e => e.Email).IsRequired().HasMaxLength(320);
+                entity.Property(e => e.HashedPassword).IsRequired().HasMaxLength(60);
             });
         }
     }
